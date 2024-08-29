@@ -1,0 +1,815 @@
+
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MEDINOVA - Assign Medicine</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">  
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <style>
+
+        .text-success {
+            color: green;
+            font-weight: 700;
+        }
+    
+        .text-danger {
+            color: red;
+            font-weight: 700;
+        }
+
+        /* Custom form styles */
+        .registration-form {
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-primary {
+            background-color: #4e73df;
+            border-color: #4e73df;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .form-row .form-group:last-child {
+            margin-right: 0;
+        }
+
+       
+
+        th {
+            text-align: center;
+        }
+        thead {
+            background-color: #01032d;
+        }
+        th {
+            color: white;
+        }
+        td {
+            color: black;
+            font-weight: 500;
+        }
+        .fullbody {
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid py-2 border-bottom d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-decoration-none text-body pe-3" href=""><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
+                        <span class="text-body">|</span>
+                        <a class="text-decoration-none text-body px-3" href=""><i class="bi bi-envelope me-2"></i>info@example.com</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-lg-end">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-body ps-2" href="">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>Medinova</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    <a href="{% url 'appointment' %}" class="nav-item nav-link">Appointment</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{% url 'blog' %}" class="dropdown-item">Blog Grid</a>
+                            <a href="{% url 'detail' %}" class="dropdown-item">Blog Detail</a>
+                            <a href="{% url 'team' %}" class="dropdown-item">The Team</a>
+                            <a href="{% url 'price' %}" class="dropdown-item">Pricing</a>
+                            <a href="{% url 'service' %}" class="dropdown-item">Service</a>
+                            <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
+                            <a href="{% url 'search' %}" class="dropdown-item">Search</a>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    
+                    {% if user.is_superuser %}
+                    <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a></li>
+                    <a href="{% url 'add_staff' %}" class="nav-item nav-link">Add Staff</a></li>
+                    <a href="{% url 'staff_list' %}" class="nav-item nav-link">Staff List</a></li>
+                    {% else %}  
+                    {% if user.is_staff %}
+                    <a href="{% url 'doctor_registration' %}" class="nav-item nav-link">Registration Form</a></li>
+                    <!-- <a href="{% url 'appointment_list' %}" class="nav-item nav-link">View Appointment</a></li> -->
+                    <a href="{% url 'doctor_appointment_list' %}"class="nav-item nav-link" >View Appointments</a>
+                    {% else %}
+                    <a href="{% url 'patient_registration' %}" class="nav-item nav-link">Patient Form</a></li>
+                    <a href="{% url 'patient_profile' %}" class="nav-item nav-link">Profile</a></li>
+                    <a href="{% url 'patient_notifications' %}" class="nav-item nav-link">
+                        <i class="fas fa-bell"></i>
+                        {% if unread_notifications_count > 0 %}
+                            <span class="badge badge-danger">{{ unread_notifications_count }}</span>
+                        {% endif %}
+                    </a>
+                    <!-- <a href="{% url 'patient_notifications' %}" class="nav-item nav-link">NOTIFICATION</a></li> -->
+                    {% endif %}
+                    {% endif %}
+                    <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a></li>
+                    {% else %}
+                    <a href="{% url 'loginform' %}" class="nav-item nav-link">Login</a></li>
+                    {% endif %}
+                   
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- <h1 style="margin-left: 10px; margin-top: 10px;">Assign Medicines to {{ appointment.name }} {{ appointment.patient.last_name }}</h1> -->
+    <div class="fullbody">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Appointment details</th>
+                    <th>Patient details</th>
+                </tr>
+            </thead>
+            <tbody>
+                        <tr>
+                            <td><p><strong>Patient Name:</strong> {{ appointment.name }} </p></td>
+                            <td><p><strong>Patient ID:</strong> {{ patient.id }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Email:</strong> {{ appointment.email }} </p></td>
+                            <td><p><strong>First Name:</strong> {{ patient.first_name }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Mobile:</strong> {{ appointment.mobile }}</p></td>
+                            <td><p><strong>Last Name:</strong> {{ patient.last_name }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Department:</strong> {{ appointment.department }}</p></td>
+                            <td><p><strong>Phone Number:</strong> {{ patient.phone_number }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Date:</strong> {{ appointment.date }}</p></td>
+                            <td><p><strong>Date of Birth:</strong> {{ patient.birth_date }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Time:</strong> {{ appointment.time }}</p></td>
+                            <td><p><strong>Blood Group:</strong> {{ patient.blood_group }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Description:</strong> {{ appointment.description }}</p></td>
+                            <td><p><strong>Sugar:</strong> {{ patient.sugar }}</p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><p><strong>Medical Type:</strong> {{ appointment.medical_type }}</p></td>
+                        </tr>
+            </tbody>
+        </table>
+        <hr>
+
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="fullbody">
+                    <div class="registration-form">
+                        <h2 >Assign Medicine</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                             <!-- Hidden input field for patient's username -->
+                            <input type="text" name="appointment_id" class="form-control bg-white border-0" style="height: 55px; margin-top: 15px;" id="appointment_id" value="{{ appointment.id }}" hidden>
+                            <div class="medicine-entry">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="medicine">Select Medicine:</label>
+                                        <select name="medicine_id[]" id="medicine" class="form-control">
+                                            {% for medicine in medicines %}
+                                                <option value="{{ medicine.id }}">{{ medicine.name }} - ${{ medicine.price }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="quantity">Quantity:</label>
+                                        <input type="number" id="quantity" name="quantity[]" value="1" min="1" class="form-control">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="time">Medicine Time:</label>
+                                        <input type="text" id="time" name="time[]" placeholder="e.g., 1-0-1" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary" onclick="addMedicine()">Add Another Medicine</button>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="prescription">Prescription:</label>
+                                    <input type="text" name="prescription" id="prescription" placeholder="Prescription" class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="need_admit" >Do you need to admit?</label>
+                                    <select name="need_admit" id="need_admit" class="form-control" onchange="toggleRoomAllocation()">
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="need_additional_services">Do you need to add other services charges?</label>
+                                    <select name="need_additional_services" id="need_additional_services" class="form-control" onchange="toggleAdditionalServices()">
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
+                                    </select>
+                                </div>
+                            </div>
+                                
+                                <!-- This is where dynamically added service entries will appear -->
+                                <div id="services-container">
+                                    <h2 class="form-title">Additional Services</h2>
+                                    <div class="service-entry">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="service_name">Service Name:</label>
+                                                <input type="text" name="service_name[]" class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="service_quantity">Quantity:</label>
+                                                <input type="number" name="service_quantity[]" class="form-control" value="1" min="1">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="service_price">Price:</label>
+                                                <input type="number" name="service_price[]" step="0.01" min="0" class="form-control">
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+
+                            <button type="button" class="btn btn-primary" onclick="addService()" style="margin-bottom: 15px;">Add Another Service</button><br>
+
+                            <div class="form-group col-md-6">
+                                <label for="need_report">Do you need to add Medical Report?</label>
+                                <select name="need_report" id="need_report" class="form-control" onchange="toggleAdditionalServices1()">
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+
+         <!-- Add Report Section -->
+ <!-- Report Fields - initially hidden -->
+    <div id="report-fields" style="display: none;">
+        <!-- Dynamic report fields will be added here -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="medical_test">Select Medical Test:</label>
+                <select name="medical_test[]" class="form-control" onchange="updateLaboratories(this)">
+                    {% for service in services %}
+                        <option value="{{ service.id }}">{{ service.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="laboratory">Select Laboratory:</label>
+                <select name="laboratory_id[]" class="form-control">
+                    <!-- Options will be dynamically populated based on selected medical test -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+<button type="button" class="btn btn-primary" onclick="addReport()" style="margin-bottom: 15px;">Add Report</button>
+<button type="button" class="btn btn-primary" style="margin-bottom: 15px;" onclick="toggleReportDetails()">View Report</button><br>
+
+{% if report1 and report1.report_pdf %}
+    <div class="form-row mt-4">
+        <div class="form-group col-md-6">
+            <label for="view_report">View Report:</label>
+            <a href="{{ report.report_pdf.url }}" target="_blank" class="btn btn-secondary" id="view_report">View PDF Report</a>
+        </div>
+    </div>
+{% endif %}
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    
+    <div id="report-details" class="fullbody" style="display: none;">
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="fullbody">
+                <div class="registration-form">
+                    <h3>Report Details</h3>
+                    <form method="post" action="#">
+                        {% csrf_token %}
+    
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="patient_name">Patient Name</label>
+                                <input type="text" id="patient_name" class="form-control" value="{{ report.patient_name }}" readonly>
+                            </div>    
+                        </div>    
+                    
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="patient_age">Age</label>
+                                <input type="text" name="patient_age" id="patient_age" class="form-control" value="{{ report.age }}" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="patient_gender">Gender</label>
+                                <input type="text" name="patient_gender" id="patient_gender" class="form-control" value="{{ report.gender }}" readonly>
+                            </div>                        
+                            <div class="form-group col-md-6">
+                                <label for="patient_blood_group">Blood Group</label>
+                                <input type="text" name="patient_blood_group" id="patient_blood_group" class="form-control" value="{{ report.blood_group }}" readonly>
+                            </div>
+                        </div>
+    
+                        <div class="medicine-entry">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="sample_type">Sample Type</label>
+                                    <input type="text" id="sample_type" name="sample_type" class="form-control" value="{{ report.sample_type }}" readonly>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="hemoglobin">Hemoglobin</label>
+                                    <input type="number" step="0.1" id="hemoglobin" name="hemoglobin" class="form-control" value="{{ report.hemoglobin }}" readonly>
+                                </div>                            
+                                <div class="form-group col-md-6">
+                                    <label for="range">Range</label>
+                                    <input type="text" id="range" name="range" class="form-control {% if report.range == 'Normal' %}text-success{% else %}text-danger{% endif %}" value="{{ report.range }}" readonly>
+                                </div>                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="prescription">Prescription:</label>
+                                <input type="text" name="prescription" id="prescription" class="form-control" value="{{ report.prescription }}" readonly>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="price">Price</label>
+                                <input type="number" step="0.01" id="price" name="price" class="form-control" value="{{ report.price }}" readonly>
+                            </div>
+                        </div>
+               
+                    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+        <h2>Last Submitted Records</h2>
+
+{% if last_medicines %}
+    <h3 style="text-align: center;">Medicines</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Medicine</th>
+                <th>Quantity</th>
+                <th>Prescription</th>
+                <th>Time</th>
+                <th>Admit Date</th>
+                <!-- Add more headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for medical_record in last_medicines %}
+                {% if medical_record.type == 'medicine' %}
+                    <tr>
+                        <td>{{ medical_record.medicine.name }}</td>
+                        <td>{{ medical_record.quantity }}</td>
+                        <td>{{ medical_record.prescription }}</td>
+                        <td>{{ medical_record.medicine_time }}</td>
+                        <td>{{ medical_record.admit_date }}</td>
+                        <!-- Add more details as needed -->
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 style="text-align: center;">Services</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Service Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+                <!-- Add more headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for medical_record in last_medicines %}
+                {% if medical_record.type == 'service' %}
+                    <tr>
+                        <td>{{ medical_record.service_name }}</td>
+                        <td>{{ medical_record.quantity }}</td>
+                        <td>{{ medical_record.price }}</td>
+                        <td>{{ medical_record.total_price }}</td>
+                        <!-- Add more details as needed -->
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 style="text-align: center;">Reports</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Report Name</th>
+                <th>Medical LAB</th>
+                <th>Price</th>
+                <th>PDF</th>
+                <!-- Add more headers as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for medical_record in last_medicines %}
+                {% if medical_record.type == 'service' %}
+                    
+                        {% for report in reports %}
+                        {% if report.patient_id == patient.id %}
+                        <tr>
+                        <td>{{ report.test_name }}</td>
+                        <td>{{ report.lab_name }}</td>
+                        <td>{{ report.price }}</td>
+                        <!-- Add more details as needed -->
+                        {% if report.report_as_pdf %}
+                        <td>
+                        <a href="{{ report.report_as_pdf.url }}" target="_blank" class="btn btn-secondary">View PDF</a>
+                        </td>
+                        {% else %}
+                        <td>No PDF Uploaded</td>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+        <!-- <tbody>
+            {% for medical_record in last_medicines %}
+
+                {% if medical_record.type == 'Report' %}
+                    <tr>
+                        <td>
+                             {% for service in services %}
+                                {% if service.id == medical_record.service_name|to_int %}
+                                    {{ service.name }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>   
+                        <td>
+                            {% for lab in laboratories %}
+                                {% if lab.id == medical_record.prescription|to_int %}
+                                    {{ lab.name }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        
+                        <td> 
+                            {% for report in reports %}
+                            {% if report.patient_id == patient.id %}
+                            {{ report.price }}
+                            {% endif %}
+                            {% endfor %}
+                            
+                        </td>
+                        <td>
+                            {% for report in reports %}
+                            {% if report.patient_id == patient.id %}
+                            {% if report.report_as_pdf %}
+                            <a href="{{ report.report_as_pdf.url }}" target="_blank" class="btn btn-secondary">View PDF</a>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody> -->
+    </table>
+
+    <!-- <tbody>
+        {% for report in report1 %}
+            <tr>
+                <td>{{ report.test_name }}</td>
+                <td>{{ report.lab_name }}</td>
+                <td>{{ report.price }}</td>
+                <td>
+                    {% if report.report_pdf %}
+                        <a href="{{ report.report_pdf.url }}" target="_blank" class="btn btn-secondary">View PDF</a>
+                    {% else %}
+                        No PDF Uploaded
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'list_reports' %}" target="_blank" class="btn btn-secondary">PDF</a></td>
+            </tr>
+        {% endfor %}
+    </tbody> -->
+
+{% else %}
+    <p>No medicines or services submitted yet.</p>
+{% endif %}
+
+</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var birthDateString = '{{ patient.birth_date|date:"Y-m-d" }}';
+            console.log('Birth Date String:', birthDateString);  // Debug statement
+            
+            if (birthDateString) {
+                var birthDate = new Date(birthDateString);
+                var ageInput = document.getElementById('patient_age');
+                var hiddenAgeInput = document.getElementById('hidden_patient_age');
+        
+                var today = new Date();
+                var age = today.getFullYear() - birthDate.getFullYear();
+                var monthDiff = today.getMonth() - birthDate.getMonth();
+        
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+        
+                console.log('Calculated Age:', age);  // Debug statement
+                ageInput.value = age;
+                hiddenAgeInput.value = age;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleAdditionalServices(); // Call the function when the DOM is loaded
+        });
+
+        function toggleReportDetails() {
+            var reportDetails = document.getElementById('report-details');
+            if (reportDetails.style.display === 'none') {
+                reportDetails.style.display = 'block';
+            } else {
+                reportDetails.style.display = 'none';
+            }
+        }
+
+        function addReport() {
+            var reportsContainer = document.getElementById('reports-container');
+        
+            var reportEntry = document.createElement('div');
+            reportEntry.className = 'report-entry';
+        
+            var formRow = document.createElement('div');
+            formRow.className = 'form-row';
+        
+            var testGroup = document.createElement('div');
+            testGroup.className = 'form-group col-md-6';
+        
+            var testLabel = document.createElement('label');
+            testLabel.setAttribute('for', 'medical_test');
+            testLabel.innerText = 'Select Medical Test:';
+        
+            var testSelect = document.createElement('select');
+            testSelect.name = 'medical_test[]';
+            testSelect.className = 'form-control';
+            testSelect.setAttribute('onchange', 'updateLaboratories(this)');
+        
+            // Populate test options (replace with your actual data)
+            var option = document.createElement('option');
+            option.value = '1';
+            option.innerText = 'Test A';
+            testSelect.appendChild(option);
+        
+            var labGroup = document.createElement('div');
+            labGroup.className = 'form-group col-md-6';
+        
+            var labLabel = document.createElement('label');
+            labLabel.setAttribute('for', 'laboratory');
+            labLabel.innerText = 'Select Laboratory:';
+        
+            var labSelect = document.createElement('select');
+            labSelect.name = 'laboratory_id[]';
+            labSelect.className = 'form-control';
+        
+            // Append options to labSelect (replace with actual data as per selected test)
+        
+            labGroup.appendChild(labLabel);
+            labGroup.appendChild(labSelect);
+        
+            formRow.appendChild(testGroup);
+            formRow.appendChild(labGroup);
+        
+            reportEntry.appendChild(formRow);
+            reportsContainer.appendChild(reportEntry);
+        }
+        
+        
+        function updateLaboratories(select) {
+            var selectedTestId = select.value;
+            var labSelect = select.parentElement.nextElementSibling.querySelector('select');
+        
+            // Clear previous laboratory options
+            labSelect.innerHTML = '';
+        
+            // Make AJAX request to fetch available laboratories for the selected medical test
+            var url = '/get_available_laboratories/' + selectedTestId + '/';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(lab => {
+                        var option = document.createElement('option');
+                        option.value = lab.id;
+                        option.innerText = lab.name;
+                        labSelect.appendChild(option);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching laboratories:', error);
+                });
+        }
+        
+
+
+    
+        function toggleAdditionalServices() {
+            const needAdditionalServices = document.getElementById('need_additional_services').value;
+            const servicesContainer = document.getElementById('services-container');
+            
+            if (needAdditionalServices === 'yes') {
+                servicesContainer.style.display = 'block';
+            } else {
+                servicesContainer.style.display = 'none';
+            }
+        }   
+
+        function toggleAdditionalServices1() {
+            var needAdditionalServices = document.getElementById('need_report').value;
+            var reportFields = document.getElementById('report-fields');
+        
+            if (needAdditionalServices === 'yes') {
+                reportFields.style.display = 'block';
+            } else {
+                reportFields.style.display = 'none';
+            }
+        }
+        
+
+
+function addMedicine() {
+    // Clone the medicine-entry div to add a new medicine entry
+    var medicineEntry = document.querySelector('.medicine-entry');
+    var newMedicineEntry = medicineEntry.cloneNode(true);
+    
+    // Clear input values in the cloned entry
+    var inputs = newMedicineEntry.querySelectorAll('input, select');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+    
+    // Insert the cloned medicine entry before the "Add Another Medicine" button
+    var addButton = document.querySelector('.btn-primary[type="button"]');
+    addButton.parentNode.insertBefore(newMedicineEntry, addButton);
+}
+
+function toggleRoomAllocation() {
+    const needAdmit = document.getElementById('need_admit').value;
+    const roomAllocation = document.getElementById('room-allocation');
+    if (needAdmit === 'yes') {
+        roomAllocation.style.display = 'block';
+    } else {
+        roomAllocation.style.display = 'none';
+    }
+}
+
+function addService() {
+    // Clone the service-entry div to add a new service entry
+    var serviceEntry = document.querySelector('.service-entry');
+    var newServiceEntry = serviceEntry.cloneNode(true);
+    
+    // Clear input values in the cloned entry
+    var inputs = newServiceEntry.querySelectorAll('input[type="text"], input[type="number"]');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+    
+    // Insert the cloned service entry before the "Add Another Service" button
+    var addButton = document.querySelector('.btn-primary[type="button"][onclick="addService()"]');
+    addButton.parentNode.insertBefore(newServiceEntry, addButton);
+}
+
+    </script>
+    <script src="{% static 'js/assign.js' %}"></script>
+</body>
+</html>

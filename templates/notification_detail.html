@@ -1,0 +1,459 @@
+
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MEDINOVA - Assign Medicine</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">  
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <style>
+        /* Custom form styles */
+        .registration-form {
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-primary {
+            background-color: #4e73df;
+            border-color: #4e73df;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .form-row .form-group:last-child {
+            margin-right: 0;
+        }
+
+       
+
+        th {
+            text-align: center;
+        }
+        thead {
+            background-color: #01032d;
+        }
+        th {
+            color: white;
+        }
+        td {
+            color: black;
+            font-weight: 500;
+        }
+        .fullbody {
+            margin-left: 10px;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        .normal-range {
+            color: green;
+            font-weight: bold;
+        }
+        .abnormal-range {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid py-2 border-bottom d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-decoration-none text-body pe-3" href=""><i class="bi bi-telephone me-2"></i>+012 345 6789</a>
+                        <span class="text-body">|</span>
+                        <a class="text-decoration-none text-body px-3" href=""><i class="bi bi-envelope me-2"></i>info@example.com</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-lg-end">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-body px-2" href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-body ps-2" href="">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid sticky-top bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>Medinova</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    <a href="{% url 'appointment' %}" class="nav-item nav-link">Appointment</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="{% url 'blog' %}" class="dropdown-item">Blog Grid</a>
+                            <a href="{% url 'detail' %}" class="dropdown-item">Blog Detail</a>
+                            <a href="{% url 'team' %}" class="dropdown-item">The Team</a>
+                            <a href="{% url 'price' %}" class="dropdown-item">Pricing</a>
+                            <a href="{% url 'service' %}" class="dropdown-item">Service</a>
+                            <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonial</a>
+                            <a href="{% url 'search' %}" class="dropdown-item">Search</a>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                    
+                    {% if user.is_superuser %}
+                    <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a></li>
+                    <a href="{% url 'add_staff' %}" class="nav-item nav-link">Add Staff</a></li>
+                    <a href="{% url 'staff_list' %}" class="nav-item nav-link">Staff List</a></li>
+                    {% else %}  
+                    {% if user.is_staff %}
+                    <a href="{% url 'doctor_registration' %}" class="nav-item nav-link">Registration Form</a></li>
+                    <!-- <a href="{% url 'appointment_list' %}" class="nav-item nav-link">View Appointment</a></li> -->
+                    <a href="{% url 'doctor_appointment_list' %}"class="nav-item nav-link" >View Appointments</a>
+                    {% else %}
+                    <a href="{% url 'patient_registration' %}" class="nav-item nav-link">Patient Form</a></li>
+                    <a href="{% url 'patient_profile' %}" class="nav-item nav-link">Profile</a></li>
+                    <a href="{% url 'patient_notifications' %}" class="nav-item nav-link">
+                        <i class="fas fa-bell"></i>
+                        {% if unread_notifications_count > 0 %}
+                            <span class="badge badge-danger">{{ unread_notifications_count }}</span>
+                        {% endif %}
+                    </a>
+                    <!-- <a href="{% url 'patient_notifications' %}" class="nav-item nav-link">NOTIFICATION</a></li> -->
+                    {% endif %}
+                    {% endif %}
+                    <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a></li>
+                    {% else %}
+                    <a href="{% url 'loginform' %}" class="nav-item nav-link">Login</a></li>
+                    {% endif %}
+                   
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}> {{ message }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- <h1 style="margin-left: 10px; margin-top: 10px;">Assign Medicines to {{ appointment.name }} {{ appointment.patient.last_name }}</h1> -->
+    <div class="fullbody">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Appointment details</th>
+                    <th>Patient details</th>
+                </tr>
+            </thead>
+            <tbody>
+                        <tr>
+                            <td><p><strong>Patient Name:</strong> {{ appointment.name }} </p></td>
+                            <td><p><strong>Patient ID:</strong> {{ patient.id }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Email:</strong> {{ appointment.email }} </p></td>
+                            <td><p><strong>First Name:</strong> {{ patient.first_name }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Mobile:</strong> {{ appointment.mobile }}</p></td>
+                            <td><p><strong>Last Name:</strong> {{ patient.last_name }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Department:</strong> {{ appointment.department }}</p></td>
+                            <td><p><strong>Phone Number:</strong> {{ patient.phone_number }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Date:</strong> {{ appointment.date }}</p></td>
+                            <td><p><strong>Date of Birth:</strong> {{ patient.birth_date }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Time:</strong> {{ appointment.time }}</p></td>
+                            <td><p><strong>Blood Group:</strong> {{ patient.blood_group }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Description:</strong> {{ appointment.description }}</p></td>
+                            <td><p><strong>Sugar:</strong> {{ patient.sugar }}</p></td>
+                        </tr>
+                        <tr>
+                            <td><p><strong>Medical Type:</strong> {{ appointment.medical_type }}</p></td>
+                            <td><p><strong>Gender:</strong> {{ patient.gender }}</p></td>
+                        </tr>
+            </tbody>
+        </table>
+        <hr>
+
+<h2>Patient Details {{ service.name }}</h2>
+<!-- <p>Patient: {{ notification.patient.username }}</p> -->
+<!-- <p>Appointment Date: {{ notification.appointment.date }}</p> --> 
+
+<h3>Report Details</h3>
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="fullbody">
+            <div class="registration-form">
+                <form method="post" action="#" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="patient_name">Patient Name</label>
+                            <input type="text" id="patient_name" class="form-control" value="{{ appointment.name }}" readonly>
+                            <input type="hidden" name="patient_name" value="{{ appointment.name }}">
+                        </div>    
+                    </div>    
+                
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="patient_age">Age</label>
+                            <input type="text" name="patient_age" id="patient_age" class="form-control" value="{{ patient.age }}" readonly>
+                            <input type="hidden" name="patient_age" id="hidden_patient_age">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="patient_gender">Gender</label>
+                            <input type="text" name="patient_gender" id="patient_gender" class="form-control" value="{{ patient.gender }}" readonly>
+                            <input type="hidden" name="patient_gender" value="{{ patient.gender }}">
+                        </div>                        
+                        <div class="form-group col-md-6">
+                            <label for="patient_blood_group">Blood Group</label>
+                            <input type="text" name="patient_blood_group" id="patient_blood_group" class="form-control" value="{{ patient.blood_group }}" readonly>
+                            <input type="hidden" name="patient_blood_group" value="{{ patient.blood_group }}">
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="test_name" id="test_name" value="{{ service.name }}">
+                    <input type="hidden" name="lab_name" name="lab_name" value="{{ laboratory.name }}">
+
+                    <div class="medicine-entry">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="sample_type">Sample Type</label>
+                                <select id="sample_type" name="sample_type" style="background-color: white;" class="form-control" required>
+                                    <option value="" disabled selected>Select Sample Type</option>
+                                    <option value="Blood">Blood</option>
+                                    <option value="Urine">Urine</option>
+                                    <option value="Saliva">Saliva</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="hemoglobin">Hemoglobin</label>
+                                <input type="number" step="0.1" id="hemoglobin" name="hemoglobin" class="form-control" required>
+                            </div>                            
+                            <div class="form-group col-md-6">
+                                <label for="range">Range</label>
+                                <input type="text" id="range" name="range" class="form-control" style="background-color: white;"    readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="prescription">Prescription:</label>
+                            <input type="text" name="prescription" id="prescription" placeholder="Prescription" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="price">Price</label>
+                            <input type="number" step="0.01" id="price" name="price" placeholder="price" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="report_pdf">Upload Report PDF:</label>
+                            <input type="file" name="report_pdf" id="report_pdf" class="form-control" accept="application/pdf">
+                        </div>
+                    </div>
+
+                    
+           
+                    <button class="btn btn-primary" type="submit">Submit Report</button>
+                </form>
+</div>
+</div>
+</div>
+</div>
+<!-- <button type="button" class="btn btn-primary" onclick="addMedicine()">Add Another Medicine</button> -->
+</body>
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var birthDateString = '{{ patient.birth_date|date:"Y-m-d" }}';
+        console.log('Birth Date String:', birthDateString);  // Debug statement
+        
+        if (birthDateString) {
+            var birthDate = new Date(birthDateString);
+            var ageInput = document.getElementById('patient_age');
+            var hiddenAgeInput = document.getElementById('hidden_patient_age');
+    
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var monthDiff = today.getMonth() - birthDate.getMonth();
+    
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+    
+            console.log('Calculated Age:', age);  // Debug statement
+            ageInput.value = age;
+            hiddenAgeInput.value = age;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('hemoglobin').addEventListener('input', function() {
+            var hemoglobin = parseFloat(this.value);
+            var gender = document.getElementById('patient_gender').value.toLowerCase();
+            var range;
+            var rangeInput = document.getElementById('range');
+
+            if (gender === 'male') {
+                if (hemoglobin < 13.5) {
+                    range = 'LOW';
+                    rangeInput.classList.remove('normal-range');
+                    rangeInput.classList.add('abnormal-range');
+                } else if (hemoglobin <= 17.5) {
+                    range = 'Normal';
+                    rangeInput.classList.remove('abnormal-range');
+                    rangeInput.classList.add('normal-range');
+                } else {
+                    range = 'HIGH';
+                    rangeInput.classList.remove('normal-range');
+                    rangeInput.classList.add('abnormal-range');
+                }
+            } else if (gender === 'female') {
+                if (hemoglobin < 12.0) {
+                    range = 'LOW';
+                    rangeInput.classList.remove('normal-range');
+                    rangeInput.classList.add('abnormal-range');
+                } else if (hemoglobin <= 15.5) {
+                    range = 'Normal';
+                    rangeInput.classList.remove('abnormal-range');
+                    rangeInput.classList.add('normal-range');
+                } else {
+                    range = 'HIGH';
+                    rangeInput.classList.remove('normal-range');
+                    rangeInput.classList.add('abnormal-range');
+                }
+            } else {
+                range = 'Unknown Gender';
+                rangeInput.classList.remove('normal-range');
+                rangeInput.classList.add('abnormal-range');
+            }
+
+            rangeInput.value = range;
+        });
+    });
+</script>
+
+
+
+    <!-- <script>
+
+function addMedicine() {
+    // Clone the medicine-entry div to add a new medicine entry
+    var medicineEntry = document.querySelector('.medicine-entry');
+    var newMedicineEntry = medicineEntry.cloneNode(true);
+    
+    // Clear input values in the cloned entry
+    var inputs = newMedicineEntry.querySelectorAll('input, select');
+    inputs.forEach(function(input) {
+        input.value = '';
+    });
+    
+    // Insert the cloned medicine entry before the "Add Another Medicine" button
+    var addButton = document.querySelector('.btn-primary[type="button"]');
+    addButton.parentNode.insertBefore(newMedicineEntry, addButton);
+}
+
+    </script> -->
+    
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Reports List</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Report Name</th>
+                    <th>Medical LAB</th>
+                    <th>Price</th>
+                    <th>PDF</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in reports %}
+                    <tr>
+                        <td>
+                            {{ report.test_name }}</td>
+                        <td>{{ report.lab_name }}</td>
+                        <td>{{ report.price }}</td>
+                        <td>
+                            {% if report.report_pdf %}
+                                <a href="{{ report.report_pdf.url }}" target="_blank" class="btn btn-secondary">View PDF</a>
+                            {% else %}
+                                No PDF Uploaded
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
